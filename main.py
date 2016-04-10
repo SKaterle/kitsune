@@ -122,7 +122,6 @@ class mainApp:
             ctrl = os.path.normpath(os.path.join(fdir, "kitsune.txt"))
             if os.path.isfile(ctrl):
                 os.remove(ctrl)
-            print(ctrl)
             handle = open(ctrl, "w")
             for child in self.__lst_manga.get_children(parent):
                 key = self.__lst_manga.item(child)['values'][0]
