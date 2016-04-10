@@ -6,7 +6,7 @@ class MangaRepository:
     def __init__(self):
         self.mangaName = ""
         self.offlineChapters = collections.OrderedDict()
-        self.adpMangaURL = collections.OrderedDict()
+        self.adpMangaURL = dict()
         self.onlineChapters = collections.OrderedDict()
         self.savePath = ""
         return

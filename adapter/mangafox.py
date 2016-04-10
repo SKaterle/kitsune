@@ -6,7 +6,7 @@ from tkinter import ttk
 
 
 class MangaFoxMe:
-    def __init__(self, lstMangas, report, pbar):
+    def __init__(self, lstMangas=None, report=None, pbar=None):
         self.__url = "http://mangafox.me/manga/"
         self.__ctrl =  "mangafoxme"
         self.__prittyName = "MangaFox"
@@ -14,7 +14,8 @@ class MangaFoxMe:
         self.__imgList = dict()
         self._listMangas = lstMangas
         self.__txtReport = report
-        self.__outReport("Adapter %s loaded.\n" % self.__prittyName)
+        if report:
+            self.__outReport("Adapter %s loaded.\n" % self.__prittyName)
         self.__progress = pbar
         return
 
@@ -43,13 +44,14 @@ class MangaFoxMe:
                 self.__downloadChapters(key)
         return
 
-    def checkMangaExist(self,mangaName):
+    def checkMangaExist(self, mangaName):
+        result = dict()
+        result[self.__ctrl] = "#skip"
         uri = self.__buildURI(mangaName)
         response = requests.get(uri)
         if response.status_code == requests.codes.ok:
-            return uri
-        else:
-            return "#skip"
+            result[self.__ctrl] = uri
+        return result
 
     def __checkChapter(self,item):
         resultChapters = dict()
