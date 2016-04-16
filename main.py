@@ -73,23 +73,24 @@ class mainApp:
         if len(self.__myMangas) > 0:
             for key in self.__myMangas:
                 item = self.__myMangas[key]
-                self.__lst_manga.insert('',
+                print(key, item.mangaName)
+                ref = self.__lst_manga.insert('',
                                         END,
-                                        iid=item.mangaName,
+                                        # iid=key,
                                         text=item.mangaName,
                                         values=(item.mangaName, "", ""))
                 if item.adpMangaURL:
                     for adpt in item.adpMangaURL:
                         if adpt:
-                            self.__lst_manga.insert(item.mangaName,
+                            self.__lst_manga.insert(ref,
                                             END,
                                             text=adpt,
                                             values=(adpt, item.adpMangaURL[adpt]))
-            l = [(self.__lst_manga.set(k, "Adapter"), k) for k in self.__lst_manga.get_children('')]
-            l.sort(reverse=False)
-            for index, (val, k) in enumerate(l):
-                self.__lst_manga.move(k, '', index)
-            self.__lst_manga.update()
+            # l = [(self.__lst_manga.set(k, "Adapter"), k) for k in self.__lst_manga.get_children('')]
+            # l.sort(reverse=False)
+            # for index, (val, k) in enumerate(l):
+            #     self.__lst_manga.move(k, '', index)
+            # self.__lst_manga.update()
         return
 
     def __add_new_manga(self):
@@ -104,7 +105,7 @@ class mainApp:
         for adapter in lstAdapter:
             for key, value in (adapter.checkMangaExist(newItem.mangaName)).items():
                 newItem.adpMangaURL[key] = value
-        self.__myMangas[newItem.mangaName] = newItem
+        self.__myMangas[len(self.__myMangas) + 1] = newItem
         self.__seach_build_list()
         return
 

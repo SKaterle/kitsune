@@ -31,7 +31,7 @@ class MangaReaderNet:
             self._listMangas[key].onlineChapters = self.__checkChapter(self._listMangas[key])
             if len(self._listMangas[key].onlineChapters) > 0:
                 self.__outReport("-- Manga '%s' has %d new chapter(s) avail.\n" %
-                                 (key, len(self._listMangas[key].onlineChapters)))
+                                 (self._listMangas[key].mangaName, len(self._listMangas[key].onlineChapters)))
                 self.__downloadChapters(key)
         return
 

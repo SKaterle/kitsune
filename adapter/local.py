@@ -41,6 +41,7 @@ class LocalMangas:
 
     def __loadChapters(self):
         self.__outReport("Loading Chapters.\n")
+        count = 0
         for key in self.__get_subdir(self.__mangaPath):
             item = MangaRepository()
             item.mangaName = key
@@ -53,7 +54,8 @@ class LocalMangas:
                     v = k.split("=")
                     item.adpMangaURL[v[0]] = v[1]
             item.offlineChapters = self.__getChapterList(key)
-            self.mangaList[item.mangaName] = item
+            self.mangaList[count] = item
+            count += 1
         self.__lst_manga.delete(*self.__lst_manga.get_children())
         if len(self.mangaList) > 0:
             for key in self.mangaList:
